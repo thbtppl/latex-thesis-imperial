@@ -1,0 +1,201 @@
+% --- Metrics
+\newcommand*{\titleornwidth}{0.40\textwidth}
+\newcommand*{\chapornwidth} {0.70\textwidth}
+
+\newcommand*{\chapvertspace}{-19pt}
+\newcommand*{\titletop}     {4.50cm}
+\newcommand*{\titlebottom}  {4.50cm}
+\newcommand*{\titleleft}    {4.50cm}
+\newcommand*{\titleright}   {4.50cm}
+\newcommand*{\bodytop}      {2.50cm}
+\newcommand*{\bodybottom}   {2.50cm}
+\newcommand*{\bodyleft}     {3.00cm}
+\newcommand*{\bodyright}    {3.00cm}
+\newcommand*{\clinewidth}   {1.50pt}
+\newcommand*{\clinelength}  {0.30}
+\newcommand*{\cedgewidth}   {0.80pt}
+\newcommand*{\cbaseline}    {-0.60ex}
+\newcommand*{\csymbwidth}   {6.50pt}
+\newcommand*{\befsymbgroup} {\bigskip}
+\newcommand*{\aftsymbgroup} {\medskip}
+\newcommand*{\eqmathskip}   {0.30\baselineskip}
+
+% --- Microtype
+% \microtypesetup{tracking=true,kerning=true,spacing=true,
+%                factor=1100,stretch=10,shrink=10}
+
+% --- Widows and orphans
+\widowpenalty=10000
+\clubpenalty=10000
+
+% --- Text spacing
+\onehalfspacing{}
+
+% --- Margin geometry
+% heightrounded avoids 'underfull vbox' warnings
+\geometry{top=\bodytop,          % for body pages
+          bottom=\bodybottom,
+          left=\bodyleft,
+          right=\bodyright,
+          heightrounded}
+\setlength{\cfttabindent}{0.0em} % removes extra indentation in LoT
+\setlength{\cftfigindent}{0.0em} % removes extra indentation in LoF
+\cftsetpnumwidth{2.0em}          % adjusts margin for page number in ToC, LoF and LoT
+
+% --- Footnote justification
+\setlength\footnotemargin{0.6em}
+
+% --- URL settings
+\urlstyle{same} % ensures URLs are typeset with document font
+
+% --- SI units
+\sisetup{mode = text,                              % ensures numbers and units are displayed with main font
+         text-micro = \ensuremath{\mu},            % uses 'mu' character from eulervm, more beautiful
+         binary-units = true,                      % allows using 'byte'
+         group-digits = integer,
+         group-minimum-digits = 4,                 % activates separation for >4-digit numbers
+         group-separator = {,}}                    % ensures comma is used as thousand separator
+\DeclareSIUnit[number-unit-product = ]\percent{\%} % removes space between number and percent sign
+
+% --- Tikz libraries and styles
+\usetikzlibrary{babel,calc,positioning,shapes.misc,shapes.geometric,arrows.meta}
+
+% --- Colours
+\definecolor{ImperialBlue}    {HTML} {003e74}
+\definecolor{ThesisBlue}      {HTML} {0000cc}
+\definecolor{ThesisRed}       {HTML} {cc0000}
+\definecolor{ThesisBlack}     {HTML} {000000}
+\definecolor{ThesisGreen}     {HTML} {006600}
+\definecolor{ThesisLghtGrey}  {HTML} {e0e0e0}
+\definecolor{ThesisDarkGrey}  {HTML} {808080}
+
+% --- Lines and markers for captions
+\newcommand*{\blackline}        {\tikz[baseline=\cbaseline]\draw[line width=\clinewidth, color=ThesisBlack]                    (0,0) -- (\clinelength,0);}
+\newcommand*{\redline}          {\tikz[baseline=\cbaseline]\draw[line width=\clinewidth, color=ThesisRed]                      (0,0) -- (\clinelength,0);}
+\newcommand*{\blueline}         {\tikz[baseline=\cbaseline]\draw[line width=\clinewidth, color=ThesisBlue]                     (0,0) -- (\clinelength,0);}
+\newcommand*{\greenline}        {\tikz[baseline=\cbaseline]\draw[line width=\clinewidth, color=ThesisGreen]                    (0,0) -- (\clinelength,0);}
+\newcommand*{\dashedblackline}  {\tikz[baseline=\cbaseline]\draw[line width=\clinewidth, color=ThesisBlack,    densely dashed] (0,0) -- (\clinelength,0);}
+\newcommand*{\dottedblackline}  {\tikz[baseline=\cbaseline]\draw[line width=\clinewidth, color=ThesisBlack,    dotted]         (0,0) -- (\clinelength,0);}
+\newcommand*{\dashedredline}    {\tikz[baseline=\cbaseline]\draw[line width=\clinewidth, color=ThesisRed,      densely dashed] (0,0) -- (\clinelength,0);}
+\newcommand*{\dashedblueline}   {\tikz[baseline=\cbaseline]\draw[line width=\clinewidth, color=ThesisBlue,     densely dashed] (0,0) -- (\clinelength,0);}
+
+\newcommand*{\blackcircle}         {\tikz{\node[draw=ThesisBlack, thick,scale=0.5,circle,fill=none]                                                           () {};}}
+\newcommand*{\bluecircle}          {\tikz{\node[draw=ThesisBlue,  thick,scale=0.5,circle,fill=none]                                                           () {};}}
+\newcommand*{\fillblackcircle}     {\tikz{\node[draw=ThesisBlack, thick,scale=0.5,circle,fill=ThesisBlack]                                                    () {};}}
+\newcommand*{\blackcross}          {\tikz{\node[draw=ThesisBlack,       scale=0.7,cross out]                                                                  () {};}}
+\newcommand*{\bluecross}           {\tikz{\node[draw=ThesisBlue,        scale=0.7,cross out]                                                                  () {};}}
+\newcommand*{\blacktriangle}       {\tikz{\node[draw=ThesisBlack, thick,scale=0.4,regular polygon,regular polygon sides=3,fill=none]                          () {};}}
+
+% --- Epigraphs
+\setlength{\epigraphrule}       {0pt} % removes the horizontal line between text and source
+\setlength{\epigraphwidth}      {0.50\textwidth}
+\setlength{\beforeepigraphskip} {0.5\baselineskip}
+\setlength{\afterepigraphskip}  {1.0\baselineskip}
+
+\newcommand*{\thesisepisrcyear}[4]{\epigraph{#1}{---#2, \textit{#3}, \textit{#4}}}
+\newcommand*{\thesisepisrc}    [3]{\epigraph{#1}{---#2, \textit{#3}}}
+\newcommand*{\thesisepi}       [2]{\epigraph{#1}{---#2}}
+
+% --- Ornaments
+\newcommand*{\titleornament}{%
+\begin{tikzpicture}
+  \node[anchor=center]{\pgfornament[color=ImperialBlue,width=\titleornwidth]{84}};
+\end{tikzpicture}}
+
+\newcommand*{\chapornament}{\pgfornament[width=\chapornwidth]{88}}
+
+% --- Footers and headers
+\renewpagestyle{plain}{%
+  \sethead{}{}{}
+  \setfoot{}{\footnotesize\thepage}{}
+}
+
+\newpagestyle{body}{%
+  \sethead{\footnotesize\slshape\MakeUppercase{\chaptername~\thechapter~-~\chaptertitle}}{}{}
+  \setfoot{}{\footnotesize\thepage}{}
+}
+
+% --- Figures and captions
+% removes the need of adding '\centering' for each figure
+\g@addto@macro\@floatboxreset\centering{}
+
+\captionsetup{labelfont=bf,font=small}
+
+% --- Algorithms
+\DontPrintSemicolon{}
+\SetAlFnt{\small\scshape}
+\newcommand*{\thesisalgokwfnt} [1]{\textbf{\textsc{#1}}}
+\newcommand*{\thesisalgoargfnt}[1]{\textsc{#1}}
+\SetKwSty{thesisalgokwfnt}
+\SetArgSty{thesisalgoargfnt}
+
+% --- Formatting and spacing of document division titles
+% inspired from https://tex.stackexchange.com/questions/384793/traditional-fancy-chapter-headings
+\titleformat{name=\chapter}[display]{\normalfont\filcenter\scshape\huge}
+            {\chaptertitlename~\thechapter}{\chapvertspace}
+            {\chapornament\\#1}
+\titleformat{name=\chapter,numberless}[display]{\normalfont\filcenter\scshape\huge}
+            {}{0pt}
+            {-- \medspace #1 \medspace --}
+
+\titlespacing*{name=\chapter}           {0pt}{50pt}{40pt}
+\titlespacing*{name=\chapter,numberless}{0pt}{5pt}{40pt}
+
+\titlespacing*{\section}      {0pt}{3.5ex  plus 1ex minus 0.2ex}{2.3ex plus 0.2ex}
+\titlespacing*{\subsection}   {0pt}{3.25ex plus 1ex minus 0.2ex}{1.5ex plus 0.2ex}
+\titlespacing*{\subsubsection}{0pt}{3.25ex plus 1ex minus 0.2ex}{1.5ex plus 0.2ex}
+
+% treats individual appendix as section rather than chapter in the ToC
+\newcommand*{\appxchaptosect}{\addtocontents{toc}{\let\protect\l@chapter\protect\l@section}}
+
+% --- Coloured boxes for chapter introduction
+\newcommand*{\chapterintrobox}[1]{%
+\begin{tcolorbox}[colback=ThesisLghtGrey,colframe=ThesisLghtGrey,sharp corners]
+  \textit{#1}
+\end{tcolorbox}}
+
+% --- Quotations
+\AtBeginEnvironment{displayquote}{\singlespacing}  % single spacing for indented quotations
+\renewcommand*{\mkbegdispquote}[2]{\openautoquote} % adds quotation marks for indented quotations
+\renewcommand*{\mkenddispquote}[2]{\closeautoquote#1#2}
+
+% --- Bibliography
+\import{utils/}{bibliography_style.tex}
+
+% --- Hyperlinks
+\hypersetup{hidelinks}
+% \hypersetup{colorlinks} % careful: colours remain when document is printed
+
+% command for frontmatter unnumbered chapters that do not appear in ToC
+% but with a PDF bookmark
+\newcommand*{\frontchapter}[2]{%
+\chapter*{#1}
+\hypertarget{#2}{}
+\bookmark[level=chapter,dest=#2]{#1}}
+
+% print ToC with bookmark in PDF
+\newcommand*{\thesistoc}{%
+\clearpage{}
+\pdfbookmark{\contentsname}{toc}
+\tableofcontents}
+
+% --- Glossaries
+\setglossarypreamble[\acronymtype]{%
+  \vspace*{-\baselineskip}%        % removes line break after title
+  \glssetwidest{XXXXXXX}}          % sets indentation for acronyms
+
+\setglossarypreamble[symbols]{%
+  \vspace*{-\baselineskip}%   % removes line break after title
+  \glssetwidest[0]{X}%        % sets indentations for symbols
+  \glssetwidest[1]{XXXX}%
+  \setlength{\parskip}{3pt}}  % changes spacing between entries
+
+\setabbreviationstyle[jargon]{long-short}
+\glssetcategoryattribute{jargon}{glossdescfont}{emph}
+\glssetcategoryattribute{abbreviation}{glossdesc}{title} % uppercase in glossary, lower case in text
+\glssetcategoryattribute{jargon}{glossdesc}{title}       % uppercase in glossary, lower case in text
+
+\newcommand*{\acronymstitle} {List of Acronyms}
+\newcommand*{\symbolstitle}  {List of Symbols}
+\newcommand*{\thesisacronyms}{\printabbreviations[title=\acronymstitle,style=alttree]}
+\newcommand*{\thesissymbols} {\printglossary[type=symbols,title=\symbolstitle,style=alttree]}

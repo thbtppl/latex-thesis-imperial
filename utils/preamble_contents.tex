@@ -1,0 +1,19 @@
+% --- Document information
+\newcommand*{\phdtitle} {My Thesis Title}
+\newcommand*{\phdauthor}{John Doe}
+\newcommand*{\phddate}  {January 2021}
+
+% --- Bibliography
+\addbibresource{./utils/thesis.bib}
+
+% --- Missing hyphenation patterns
+\hyphenation{Chi-ches-ter}
+
+% --- Maths commands
+\import{utils/}{maths.tex}
+
+% --- Acronyms and symbols
+% \glsaddall adds all defined entries regardless of text occurence
+\import{utils/}{acronyms.tex}
+\import{utils/}{symbols.tex}
+\glsaddall{}

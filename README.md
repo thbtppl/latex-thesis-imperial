@@ -1,2 +1,4 @@
 # Imperial College London PhD thesis template in LaTeX
-LaTeX template for PhD thesis compliant with Imperial College London regulations
+
+* Compliant with Imperial College London regulations
+* Bibliography strictly conforming to [Imperial's Harvard style](https://www.imperial.ac.uk/admin-services/library/learning-support/reference-management/harvard-style/your-reference-list/)

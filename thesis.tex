@@ -1,0 +1,53 @@
+\begin{filecontents*}{\jobname.xmpdata}
+  \Author       {John Doe}
+  \Title        {My Thesis Title}
+  \Language     {en-GB}
+  \Keywords     {keyword1\sep keyword2\sep keyword3}
+  \Subject      {PhD thesis}
+  \Copyright    {\copyright 2021 John Doe}
+  \CopyrightURL {https://creativecommons.org/licenses/by-nc-nd/4.0/legalcode}
+\end{filecontents*}
+
+\documentclass[a4paper,12pt,UKenglish,oneside,titlepage]{book} % use draft option to detect overfull hboxes
+
+\usepackage{icl_thesis}
+
+\import{utils/}{preamble_contents.tex}
+
+\begin{document}
+
+\import{title/}{title.tex}
+
+\import{dedication/}{dedication.tex}
+
+\import{originality/}{originality.tex}
+
+\import{copyright/}{copyright.tex}
+
+\import{abstract/}{abstract.tex}
+
+\import{acknowledgements/}{acknowledgements.tex}
+
+\microtypesetup{protrusion=false}
+
+\thesistoc{}
+
+\listoffigures{}
+
+\listoftables{}
+
+\microtypesetup{protrusion=true}
+
+\thesisacronyms{}
+
+\thesissymbols{}
+
+\import{chapters/chapter1/}{chapter1.tex}
+
+\import{chapters/chapter2/}{chapter2.tex}
+
+\import{utils/}{bibliography.tex}
+
+\import{appendices/}{appendices.tex}
+
+\end{document}

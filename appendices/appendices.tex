@@ -1,0 +1,21 @@
+\clearpage{}
+
+\bookmarksetupnext{level=-1} % correct appendix bookmarks
+
+\appendix{} % required for correct cleverref reference
+
+\captionsetup{list=no} % do not add following figures/tables in LoF/LoT
+
+\begin{appendices}
+
+\appxchaptosect{}
+
+% appendices are numbered chapters: redefining title format
+% to get similar style as unnumbered chapters
+\titleformat{name=\chapter}[display]{\normalfont\filcenter\scshape\huge}
+            {Appendix~\thechapter}{\chapvertspace}
+            {\chapornament\\#1}
+
+\import{./}{appendixA.tex}
+
+\end{appendices}

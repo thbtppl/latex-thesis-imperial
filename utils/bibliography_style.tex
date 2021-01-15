@@ -1,0 +1,251 @@
+\ExecuteBibliographyOptions{sorting=nyt,
+                            maxbibnames=50,   % ensures all authors appear in bibliography
+                            maxcitenames=3,   % truncates text citations with >3 authors
+                            autolang=hyphen,  % loads specific hyphenation patterns w.r.t langid field
+                            dateabbrev=false, % do not abbreviate dates
+                            dashed=false,     % do not replace duplicate authors by dash in bibliography
+                            urldate=long,     % use long access dates for URLs
+                            giveninits,       % abbreviate given names
+                            useprefix=true,   % takes into account last name prefixes
+                            uniquename=false} % deactivates initial-based disambiguation when authors
+                                              % share the same surname
+
+\setlength{\bibitemsep}{\parskip} % adds vertical space between bibliography entries
+\setlength{\bibhang}{0.0pt}       % removes indentation in bibliography entries
+
+\setcounter{biburlnumpenalty}{9000} % allows breakpoints in URLs/DOIs
+
+\renewcommand*{\nameyeardelim}  {\addcomma\space}    % adds comma between author and year
+\renewcommand*{\finalnamedelim} {\space\&\space}     % uses '&' before last author name
+\renewcommand*{\labelnamepunct} {\addspace}          % removes dot between year and title
+\renewcommand*{\subtitlepunct}  {\addcolon\addspace} % separator between title and subtitle
+\renewcommand*{\mkbibacro}[1]{#1}                    % removes font change for 'DOI' or 'URL'
+
+\renewcommand*{\bibpagespunct}{% % removes comma in page delimiter for articles without volume/number
+  \ifentrytype{article}
+    {\iffieldundef{volume}
+      {\iffieldundef{number}
+        {\addspace}
+        {\addcomma\space}}
+      {\addcomma\space}}
+    {\addcomma\space}}
+
+\renewrobustcmd*{\bibinitdelim}{\,} % forces thin space between multiple author initials
+
+\DeclareNameAlias{sortname}{family-given} % puts last name before first name
+
+\DeclareFieldFormat{journaltitle}{\mkbibemph{#1}\adddot}                  % adds dot after journal title in article entry
+\DeclareFieldFormat[article]{number}{\mkbibparens{#1}}                    % puts article number between parentheses
+\DeclareFieldFormat[article,inproceedings,incollection,online]{title}{#1} % removes quotes in title
+\DeclareFieldFormat[article]{pages}{#1}                                   % removes 'p.' or 'pp.' for article entries
+\DeclareFieldFormat[thesis,phdthesis,report]{title}{\mkbibemph{#1}}       % thesis and report titles in italic
+\DeclareFieldFormat[inproceedings]{eventtitle}{\mkbibemph{#1}}            % italic event title for inproceedings entry
+\DeclareFieldFormat[inproceedings]{eventdate}{\mkbibemph{#1}}             % italic event date for inproceedings entry
+\DeclareFieldFormat[inproceedings]{venue}{\mkbibemph{#1}}                 % italic venue for inproceedings entry
+\DeclareFieldFormat[book]{editortype}{\mkbibparens{#1}}                   % editor string between parentheses for book entry
+\DeclareFieldFormat{sentencecase}{\MakeSentenceCase*{#1}}                 % sentence case capitalisation for all titles
+\DeclareFieldFormat[report]{number}{\printtext{Report number:} #1}        % adds 'report number' string for report entries
+\DeclareFieldFormat{urldate}{\mkbibbrackets{\bibstring{urlseen}\space#1}} % puts URL access date between square brackets
+
+\DeclareDelimFormat{editortypedelim}{\addspace} % puts a space instead of a comma between editor and (ed.)
+
+\DeclareDelimFormat[textcite]{finalnamedelim}{%  % uses 'and' between multiple authors for in-text citations
+  \ifnumgreater{\value{liststop}}{2}{\finalandcomma}{}%
+  \addspace\bibstring{and}\space}
+
+\NewBibliographyString{available}
+\DefineBibliographyStrings{UKenglish}{%
+  available = {Available from},
+  editor    = {\lowercase{ed}\adddot},
+  editors   = {\lowercase{eds}\adddot},
+  urlseen   = {Accessed}
+}
+
+% adds 'Available from:' in front of 'DOI:'
+% \DeclareFieldFormat{doi}{%
+%   \bibstring{available}\addcolon\space\mkbibacro{DOI}\addcolon\space
+%   \ifhyperref
+%     {\href{https://doi.org/#1}{\nolinkurl{#1}}}
+%     {\nolinkurl{#1}}}
+
+% adds 'Available from:' in front of 'URL:'
+\DeclareFieldFormat{url}{%
+  \bibstring{available}\addcolon\space\mkbibacro{URL}\addcolon\space\url{#1}}
+
+\DeclareFieldFormat{eprint:arxiv}{%
+ArXiv\adddot\space[Preprint]\space\bibstring{available}\addcolon\space%
+\ifhyperref%
+  {\href{https://arxiv.org/\abx@arxivpath/#1}{%
+      \nolinkurl{#1}%
+      \iffieldundef{eprintclass}
+        {}
+        {\addspace\mkbibbrackets{\thefield{eprintclass}}}}}
+  {\nolinkurl{#1}%
+    \iffieldundef{eprintclass}
+      {}
+      {\addspace\mkbibbrackets{\thefield{eprintclass}}}}}
+
+% removes 'In:' for article entries
+\renewbibmacro*{in:}{%
+  \ifentrytype{article}{}{\printtext{\bibstring{in}\intitlepunct}}}
+
+% removes dot between volume and number
+\renewbibmacro*{volume+number+eid}{%
+  \printfield{volume}%
+  \setunit*{\addnbspace}%
+  \printfield{number}%
+  \setunit{\addcomma\space}%
+  \printfield{eid}}
+
+% removes colon and puts comma between location and publisher
+\renewbibmacro*{publisher+location+date}{%
+  \printlist{location}%
+  \setunit*{\addcomma\space}%
+  \printlist{publisher}%
+  \setunit*{\addcomma\space}%
+  \usebibmacro{date}%
+  \newunit}
+
+% puts a comma between series and number
+\renewbibmacro*{series+number}{%
+  \printfield{series}%
+  \setunit*{\addcomma\space}%
+  \printfield{number}%
+  \newunit}
+
+% removes parentheses around venue/event date group
+\renewbibmacro*{event+venue+date}{%
+  \printfield{eventtitle}%
+  \setunit*{\addcomma\space}%
+  \printfield{eventtitleaddon}%
+  \setunit*{\addcomma\space}%
+  \printeventdate%
+  \setunit*{\addcomma\space}%
+  \printfield{venue}%
+  \newunit}
+
+% ensures sentence case capitalisation for all titles
+\renewbibmacro*{title}{%
+  \ifthenelse{\iffieldundef{title}\AND\iffieldundef{subtitle}}
+    {}
+    {\printtext[title]{%
+      \printfield[sentencecase]{title}%
+      \setunit{\subtitlepunct}%
+      \printfield[sentencecase]{subtitle}}}%
+    \newunit%
+  \printfield{titleaddon}}
+
+% ensures sentence case capitalisation for book maintitle
+\renewbibmacro*{maintitle}{%
+  \ifboolexpr{%
+    test {\iffieldundef{maintitle}}
+    and
+    test {\iffieldundef{mainsubtitle}}
+  }
+    {}
+    {\printtext[maintitle]{%
+       \printfield[sentencecase]{maintitle}%
+       \setunit{\subtitlepunct}%
+       \printfield[sentencecase]{mainsubtitle}}%
+     \newunit}%
+  \printfield{maintitleaddon}}
+
+% removes cardinal numbers for dates, taken from australian.lbx
+\DefineBibliographyExtras{british}{%
+  \protected\def\mkbibdatelong#1#2#3{%
+    \iffieldundef{#3}
+      {}
+      {\stripzeros{\thefield{#3}}%
+       \iffieldundef{#2}{}{\nobreakspace}}%
+    \iffieldundef{#2}
+      {}
+      {\mkbibmonth{\thefield{#2}}%
+       \iffieldundef{#1}{}{\space}}%
+    \iffieldbibstring{#1}{\bibstring{\thefield{#1}}}{\stripzeros{\thefield{#1}}}}%
+  \protected\def\mkbibseasondateshort#1#2{%
+    \mkbibseason{\thefield{#2}}%
+    \iffieldundef{#1}{}{\space}%
+    \mkyearzeros{\thefield{#1}}}%
+  \protected\def\mkbibseasondatelong#1#2{%
+    \mkbibseason{\thefield{#2}}%
+    \iffieldundef{#1}{}{\space}%
+    \mkyearzeros{\thefield{#1}}}}
+
+% ensures fullcite entries match bibliography list ones
+% dot manually added at the end
+\DeclareCiteCommand{\fullcite}
+  {\usebibmacro{prenote}}
+  {\usedriver%
+    {\defcounter{minnames}{50}%
+     \defcounter{maxnames}{50}}
+    {\thefield{entrytype}}\adddot}
+  {\multicitedelim}
+  {\usebibmacro{postnote}}
+
+% replaces "ed. by" by (ed[s]) for @inXXX entries
+\newbibmacro*{byeditor:in}{%
+\ifnameundef{editor}
+  {}
+  {\printnames[editorin]{editor}%
+   \addspace\bibsentence%
+   \mkbibparens{\usebibmacro{editorstrg}}%
+   \clearname{editor}%
+   \printunit{\addcomma\space}}}
+
+\xpatchbibdriver{incollection}
+  {\usebibmacro{in:}%
+   \usebibmacro{maintitle+booktitle}%
+   \newunit\newblock%
+   \usebibmacro{byeditor+others}}
+  {\usebibmacro{in:}%
+   \usebibmacro{byeditor:in}%
+   \setunit{\labelnamepunct}\newblock%
+   \usebibmacro{maintitle+booktitle}%
+   \newunit\newblock%
+   \usebibmacro{byeditor}}
+  {}{}
+
+\xpatchbibdriver{inproceedings}
+  {\usebibmacro{in:}%
+   \usebibmacro{maintitle+booktitle}%
+   \newunit\newblock%
+   \usebibmacro{event+venue+date}%
+   \newunit\newblock%
+   \usebibmacro{byeditor+others}}
+  {\usebibmacro{in:}%
+   \usebibmacro{byeditor:in}%
+   \setunit{\labelnamepunct}\newblock%
+   \usebibmacro{maintitle+booktitle}%
+   \newunit\newblock%
+   \usebibmacro{event+venue+date}%
+   \newunit\newblock%
+   \usebibmacro{byeditor+others}}
+  {}{}
+
+% puts institution just after title for report entries
+\xpatchbibdriver{report}
+  {\usebibmacro{byauthor}%
+   \newunit\newblock%
+   \printfield{type}%
+   \setunit*{\addspace}%
+   \printfield{number}%
+   \newunit\newblock%
+   \printfield{version}%
+   \newunit%
+   \printfield{note}%
+   \newunit\newblock%
+   \usebibmacro{institution+location+date}%
+   \newunit\newblock}
+  {\usebibmacro{byauthor}%
+   \newunit\newblock%
+   \usebibmacro{institution+location+date}%
+   \newunit\newblock%
+   \printfield{type}%
+   \setunit*{\addspace}%
+   \printfield{number}%
+   \newunit\newblock%
+   \printfield{version}%
+   \newunit%
+   \printfield{note}%
+   \newunit\newblock}
+  {}{}

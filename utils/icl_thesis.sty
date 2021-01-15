@@ -1,0 +1,114 @@
+\NeedsTeXFormat{LaTeX2e}[2020-10-01]
+\ProvidesPackage{icl_thesis}
+
+% --- Warn when use of obsolete/deprecated/non-amsmath commands
+\RequirePackage[l2tabu,orthodox]{nag}
+\RequirePackage[all,warning]{onlyamsmath}
+
+% --- Include external files from any directory
+\RequirePackage{import}
+
+% --- Input/output font encoding
+% fontenc should be called before inputenc
+\RequirePackage[T1]{fontenc}
+\RequirePackage[utf8]{inputenc}
+
+% --- Language
+\RequirePackage{babel}
+
+% --- Micro-typographic improvements
+% adjusts typestting according to babel
+% 'final' option enables microtype in draft mode
+% microtype should be loaded after babel with such option
+\RequirePackage[babel=true,final]{microtype}
+
+% --- Mathematics
+% mathtools loads amsmath + improvements
+\RequirePackage{mathtools}
+\RequirePackage{amsfonts}
+
+% --- Font choice
+% newpxtext should be loaded after babel
+\RequirePackage{newpxtext}  % text font
+\RequirePackage{eulervm}    % math font
+
+% --- URLs
+\RequirePackage{url}
+
+% --- Command patching
+\RequirePackage{etoolbox} % necessary for \displayquote customisation
+\RequirePackage{xpatch}   % necessary for biblatex customisation
+
+% --- Bibliography
+% biblatex should be loaded after babel
+% csquotes is recommended by biblatex if not writing in US english
+\RequirePackage[backend=biber,bibstyle=authoryear,citestyle=authoryear]{biblatex}
+\RequirePackage[autostyle]{csquotes}
+
+% --- Customise design of LoF/LoT
+\RequirePackage[titles]{tocloft}
+
+% --- Section titles, headers/footers, appearance in ToC
+\RequirePackage[compact,explicit,pagestyles]{titlesec}
+\RequirePackage[nottoc]{tocbibind}
+\RequirePackage[toc]{appendix}
+
+% --- Page layout
+% line spacing, margins, paragraphs, headers/footers and footnotes
+% parskip should be loaded after tocloft
+\RequirePackage{setspace}
+\RequirePackage{geometry}
+\RequirePackage{parskip}
+\RequirePackage[hang]{footmisc}
+
+% --- External and vector graphics
+\RequirePackage{graphicx}
+\RequirePackage{tikz}
+
+% --- Epigraphs, ornaments and lettrines
+\RequirePackage{epigraph}
+\RequirePackage{pgfornament}
+\RequirePackage{lettrine}
+
+% --- Tables and algorithms
+\RequirePackage{booktabs}
+\RequirePackage[plainruled]{algorithm2e}
+
+% --- Captions
+% loading caption corrects caption anchors with hyperref
+\RequirePackage{caption}[2020/09/12]
+\RequirePackage{subcaption}
+
+% --- SI units typesetting
+\RequirePackage{siunitx}
+
+% --- PDF/A compliance
+% loads hyperref and xcolor
+% pdfx loaded here requires biblatex >= 3.16
+\RequirePackage[a-2b]{pdfx}
+
+% --- Colours
+\RequirePackage{xcolor}
+\RequirePackage{tcolorbox}
+
+% --- Cross-referencing
+\RequirePackage{hyperref}
+\RequirePackage[capitalise]{cleveref}
+
+% --- ORCID logo and link
+% requires hyperref
+\RequirePackage{orcidlink}
+
+% --- Customise PDF bookmarks
+% requires hyperref
+\RequirePackage{bookmark}
+
+% --- Acronyms and symbols
+% glossaries-extra should be loaded after hyperref
+% with sort=def, use nogroupskip to prevent weird vertical gaps
+% with \glsaddall command, option nonumberlist should be used
+\RequirePackage[automake,abbreviations,nonumberlist,sort=def,nogroupskip]{glossaries-extra}
+\newglossary*{symbols}{dummy}
+\makeglossaries
+
+\import{utils/}{layout_style.tex}
