@@ -1,4 +1,4 @@
-% --- Metrics
+% --- Some document metrics
 \newcommand*{\titleornwidth}{0.40\textwidth}
 \newcommand*{\chapornwidth} {0.70\textwidth}
 
@@ -70,20 +70,16 @@
 \definecolor{ThesisDarkGrey}  {HTML} {808080}
 
 % --- Lines and markers for captions
-\newcommand*{\blackline}        {\tikz[baseline=\cbaseline]\draw[line width=\clinewidth, color=ThesisBlack]                    (0,0) -- (\clinelength,0);}
-\newcommand*{\redline}          {\tikz[baseline=\cbaseline]\draw[line width=\clinewidth, color=ThesisRed]                      (0,0) -- (\clinelength,0);}
-\newcommand*{\blueline}         {\tikz[baseline=\cbaseline]\draw[line width=\clinewidth, color=ThesisBlue]                     (0,0) -- (\clinelength,0);}
-\newcommand*{\greenline}        {\tikz[baseline=\cbaseline]\draw[line width=\clinewidth, color=ThesisGreen]                    (0,0) -- (\clinelength,0);}
-\newcommand*{\dashedblackline}  {\tikz[baseline=\cbaseline]\draw[line width=\clinewidth, color=ThesisBlack,    densely dashed] (0,0) -- (\clinelength,0);}
-\newcommand*{\dottedblackline}  {\tikz[baseline=\cbaseline]\draw[line width=\clinewidth, color=ThesisBlack,    dotted]         (0,0) -- (\clinelength,0);}
-\newcommand*{\dashedredline}    {\tikz[baseline=\cbaseline]\draw[line width=\clinewidth, color=ThesisRed,      densely dashed] (0,0) -- (\clinelength,0);}
-\newcommand*{\dashedblueline}   {\tikz[baseline=\cbaseline]\draw[line width=\clinewidth, color=ThesisBlue,     densely dashed] (0,0) -- (\clinelength,0);}
+\newcommand*{\blackline}        {\tikz[baseline=\cbaseline]\draw[line width=\clinewidth, color=ThesisBlack]                  (0,0) -- (\clinelength,0);}
+\newcommand*{\redline}          {\tikz[baseline=\cbaseline]\draw[line width=\clinewidth, color=ThesisRed]                    (0,0) -- (\clinelength,0);}
+\newcommand*{\blueline}         {\tikz[baseline=\cbaseline]\draw[line width=\clinewidth, color=ThesisBlue]                   (0,0) -- (\clinelength,0);}
+\newcommand*{\greenline}        {\tikz[baseline=\cbaseline]\draw[line width=\clinewidth, color=ThesisGreen]                  (0,0) -- (\clinelength,0);}
+\newcommand*{\dashedblackline}  {\tikz[baseline=\cbaseline]\draw[line width=\clinewidth, color=ThesisBlack,  densely dashed] (0,0) -- (\clinelength,0);}
 
 \newcommand*{\blackcircle}         {\tikz{\node[draw=ThesisBlack, thick,scale=0.5,circle,fill=none]                                                           () {};}}
 \newcommand*{\bluecircle}          {\tikz{\node[draw=ThesisBlue,  thick,scale=0.5,circle,fill=none]                                                           () {};}}
 \newcommand*{\fillblackcircle}     {\tikz{\node[draw=ThesisBlack, thick,scale=0.5,circle,fill=ThesisBlack]                                                    () {};}}
 \newcommand*{\blackcross}          {\tikz{\node[draw=ThesisBlack,       scale=0.7,cross out]                                                                  () {};}}
-\newcommand*{\bluecross}           {\tikz{\node[draw=ThesisBlue,        scale=0.7,cross out]                                                                  () {};}}
 \newcommand*{\blacktriangle}       {\tikz{\node[draw=ThesisBlack, thick,scale=0.4,regular polygon,regular polygon sides=3,fill=none]                          () {};}}
 
 % --- Epigraphs
@@ -105,21 +101,21 @@
 \newcommand*{\chapornament}{\pgfornament[width=\chapornwidth]{88}}
 
 % --- Footers and headers
-\renewpagestyle{plain}{%
+\renewpagestyle{plain}{% % frontmatter and backmatter: no header
   \sethead{}{}{}
-  \setfoot{}{\footnotesize\thepage}{}
+  \setfoot{}{\footnotesize\thepage}{} % page number at the bottom
 }
 
-\newpagestyle{body}{%
+\newpagestyle{body}{% % mainmatter: header contains chapter title
   \sethead{\footnotesize\slshape\MakeUppercase{\chaptername~\thechapter~-~\chaptertitle}}{}{}
-  \setfoot{}{\footnotesize\thepage}{}
+  \setfoot{}{\footnotesize\thepage}{} % page number at the bottom
 }
 
 % --- Figures and captions
-% removes the need of adding '\centering' for each figure
+% removes the need for adding '\centering' for each figure
 \g@addto@macro\@floatboxreset\centering{}
 
-\captionsetup{labelfont=bf,font=small}
+\captionsetup{labelfont=bf,font=small} % caption header in bold font, small caption font
 
 % --- Algorithms
 \DontPrintSemicolon{}
@@ -163,8 +159,8 @@
 \import{utils/}{bibliography_style.tex}
 
 % --- Hyperlinks
-\hypersetup{hidelinks}
-% \hypersetup{colorlinks} % careful: colours remain when document is printed
+% \hypersetup{hidelinks}
+\hypersetup{colorlinks} % careful: colours remain when document is printed
 
 % command for frontmatter unnumbered chapters that do not appear in ToC
 % but with a PDF bookmark

@@ -72,7 +72,7 @@
 \DeclareFieldFormat{url}{%
   \bibstring{available}\addcolon\space\mkbibacro{URL}\addcolon\space\url{#1}}
 
-\DeclareFieldFormat{eprint:arxiv}{%
+\DeclareFieldFormat{eprint:arxiv}{% % reformatting ArXiv entry with [Preprint]
 ArXiv\adddot\space[Preprint]\space\bibstring{available}\addcolon\space%
 \ifhyperref%
   {\href{https://arxiv.org/\abx@arxivpath/#1}{%
